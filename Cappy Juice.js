@@ -2,12 +2,11 @@ function main(input) {
   const fruits = {}
 
   input.forEach(str => {
-    let [fruit, quatity] = str.split(" => ")
-    quatity = Number(quatity)
+    const [fruit, quatity] = str.split(" => ")
     if (fruits[fruit]) {
-      fruits[fruit] += quatity
+      fruits[fruit] += Number(quatity)
     } else {
-      fruits[fruit] = quatity
+      fruits[fruit] = Number(quatity)
     }
   });
 
