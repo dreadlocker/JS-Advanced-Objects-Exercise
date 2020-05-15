@@ -1,28 +1,14 @@
 function main(input) {
-  const items = {}
-  input.forEach((str, index) => {
-    const key = str[0]
-    if (!items[key]) {
-      items[key] =
-        input.filter(str => str[0] === key)
-        .sort((a, b) => {
-            if (a < b) {
-              return -1
-            }
-            if (a > b) {
-              return 1
-            }
-            return 0
-        })
-    }
-  })
+  const uniqueChars = new Set(input.map(str => str[0]).sort());
+  const catalogue = {}
+  uniqueChars.forEach(key => catalogue[key] = input.filter(str => str[0] === key).sort());
 
   let result = ""
-  Object.keys(items)
-    .sort()
-    .forEach(str => {
-      result += `${str}\n  ${items[str].join("\n  ")}\n`
-    })
+  for (const key in catalogue) {
+    if (catalogue.hasOwnProperty(key)) {
+      result += `${key}\n  ${catalogue[key].join("\n  ")}\n`
+    }
+  }
 
   return result
 }
