@@ -17,21 +17,21 @@ function main(input) {
       });
   }
 
-  let result = ""
+  let toString = ""
   for (const brand in cars) {
     if (cars.hasOwnProperty(brand)) {
       const models = cars[brand];
-      result += `${brand}\n`
+      toString += `${brand}\n`
       for (const model in models) {
         if (models.hasOwnProperty(model)) {
           const producedCars = models[model];
-          result += `###${model} -> ${producedCars}\n`
+          toString += `###${model} -> ${producedCars}\n`
         }
       }
     }
   }
 
-  return result
+  return toString
 }
 
 const a = [
