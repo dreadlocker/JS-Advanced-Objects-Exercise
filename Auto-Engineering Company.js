@@ -1,27 +1,35 @@
 function main(input) {
+  const allCars = input.map(str => str.split(" | "))
+  const uniqueCars = new Set(allCars.map(arr => arr[0]))
   const cars = {}
-  input.forEach(str => {
-    let [brand, model, count] = str.split(" | ")
-    count = +count
-    if (!cars[brand]) {
-      cars[brand] = {[model]: count}
-    } else {
-      if (cars[brand][model]) {
-        cars[brand][model] += count
-      } else {
-        cars[brand][model] = count
-      }
-    }
-  });
+  for (const key of uniqueCars) {
+    cars[key] = {}
+    allCars
+      .filter(arr => arr[0] === key)
+      .forEach(arr => {
+        const model = arr[1]
+        const producedCars = Number(arr[2])
+        if (cars[key][model]) {
+          cars[key][model] += producedCars;
+        } else {
+          cars[key][model] = producedCars;
+        }
+      });
+  }
 
   let result = ""
-  Object.keys(cars)
-    .forEach(key => {
-      result += `${key}\n`
-      Object.keys(cars[key]).forEach(model => {
-        result += `###${model} -> ${cars[key][model]}\n`
-      });
-    });
+  for (const brand in cars) {
+    if (cars.hasOwnProperty(brand)) {
+      const models = cars[brand];
+      result += `${brand}\n`
+      for (const model in models) {
+        if (models.hasOwnProperty(model)) {
+          const producedCars = models[model];
+          result += `###${model} -> ${producedCars}\n`
+        }
+      }
+    }
+  }
 
   return result
 }
