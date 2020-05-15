@@ -2,19 +2,24 @@ function main(input) {
   const fruits = {}
 
   input.forEach(str => {
-    const [fruit, quatity] = str.split(" => ")
+    let [fruit, quatity] = str.split(" => ")
+    quatity = Number(quatity)
     if (fruits[fruit]) {
-      return fruits[fruit] += +quatity
+      fruits[fruit] += quatity
+    } else {
+      fruits[fruit] = quatity
     }
-    return fruits[fruit] = +quatity
   });
 
   let result = "";
-  Object.values(fruits).forEach((quatity, index) => {
-    if (quatity > 1000) {
-      return result += `${Object.keys(fruits)[index]} => ${Math.floor(quatity / 1000)}\n`
+  for (const key in fruits) {
+    if (fruits.hasOwnProperty(key)) {
+      const quatity = fruits[key];
+      if (quatity > 1000) {
+        result += `${key} => ${Math.floor(quatity / 1000)}\n`
+      }
     }
-  })
+  }
 
   return result
 }

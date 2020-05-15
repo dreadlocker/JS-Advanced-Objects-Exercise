@@ -10,9 +10,8 @@ function main(input) {
 
     for (const key in personInfo) {
       if (personInfo.hasOwnProperty(key)) {
-        const el = personInfo[key];
         const td = document.createElement("td")
-        td.innerText = el
+        td.innerText = personInfo[key]
         tr.appendChild(td)
       }
     }
