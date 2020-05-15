@@ -1,9 +1,9 @@
 function main(input) {
   const uniqueChars = new Set(input.map(str => str[0]).sort());
   const catalogue = {}
-  uniqueChars.forEach(key => {
+  for (const key of uniqueChars) {
     catalogue[key] = input.filter(str => str[0] === key).sort() 
-  });
+  }
 
   let result = ""
   for (const key in catalogue) {
