@@ -1,33 +1,25 @@
 function main(input) {
-  const allCars = input.map(str => str.split(" | "))
-  const uniqueCars = new Set(allCars.map(car => car[0]))
-  const cars = {}
-  for (const key of uniqueCars) {
-    cars[key] = {}
-    allCars
-      .filter(car => car[0] === key)
-      .forEach(car => {
-        const model = car[1]
-        const producedCars = Number(car[2])
-        if (cars[key][model]) {
-          cars[key][model] += producedCars;
-        } else {
-          cars[key][model] = producedCars;
-        }
-      });
+  const cars = new Map()
+  for (const info of input) {
+    const car = info.split(" | ")
+    const brand = car[0]
+    const model = car[1]
+    const producedCars = Number(car[2])
+
+    if (!cars.get(brand)) {
+      cars.set(brand, new Map())
+    }
+    if (!cars.get(brand).get(model)) {
+      cars.get(brand).set(model, 0)
+    }
+    cars.get(brand).set(model, cars.get(brand).get(model) + producedCars)
   }
 
   let toString = ""
-  for (const brand in cars) {
-    if (cars.hasOwnProperty(brand)) {
-      const models = cars[brand];
-      toString += `${brand}\n`
-      for (const model in models) {
-        if (models.hasOwnProperty(model)) {
-          const producedCars = models[model];
-          toString += `###${model} -> ${producedCars}\n`
-        }
-      }
+  for (const [brand, models] of cars) {
+    toString += `${brand}\n`
+    for (const [model, producedCars] of models) {
+      toString += `###${model} -> ${producedCars}\n`
     }
   }
 
@@ -44,6 +36,6 @@ const a = [
 'Lada | Niva | 1000000',
 'Lada | Jigula | 1000000',
 'Citroen | C4 | 22',
-'Citroen | C5 | 10'
+'Citroen | C5 | 10',
 ]
 console.log(main(a));
