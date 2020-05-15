@@ -6,13 +6,16 @@ function main(input) {
   input.forEach(json => {
     const tr = document.createElement("tr")
     table.appendChild(tr)
-    const objValues = Object.values(JSON.parse(json))
-    
-    objValues.forEach(el => {
-      const td = document.createElement("td")
-      td.innerText = el
-      tr.appendChild(td)
-    });
+    const personInfo = JSON.parse(json);
+
+    for (const key in personInfo) {
+      if (personInfo.hasOwnProperty(key)) {
+        const el = personInfo[key];
+        const td = document.createElement("td")
+        td.innerText = el
+        tr.appendChild(td)
+      }
+    }
   });
 }
 
