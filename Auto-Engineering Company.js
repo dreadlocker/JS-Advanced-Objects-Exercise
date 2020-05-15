@@ -1,14 +1,14 @@
 function main(input) {
   const allCars = input.map(str => str.split(" | "))
-  const uniqueCars = new Set(allCars.map(arr => arr[0]))
+  const uniqueCars = new Set(allCars.map(car => car[0]))
   const cars = {}
   for (const key of uniqueCars) {
     cars[key] = {}
     allCars
-      .filter(arr => arr[0] === key)
-      .forEach(arr => {
-        const model = arr[1]
-        const producedCars = Number(arr[2])
+      .filter(car => car[0] === key)
+      .forEach(car => {
+        const model = car[1]
+        const producedCars = Number(car[2])
         if (cars[key][model]) {
           cars[key][model] += producedCars;
         } else {
