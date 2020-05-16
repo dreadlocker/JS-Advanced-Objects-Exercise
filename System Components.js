@@ -34,14 +34,12 @@ function createData(input) {
 
 function sortSystems(systems) {
   return Object.keys(systems).sort((a, b) => {
-    const sortByComponentsCount = (Object.keys(systems[b]).length) - (Object.keys(systems[a]).length)
-    if (sortByComponentsCount) {
-      return sortByComponentsCount
-    } else {
-      if (a > b) return 1
-      if (a < b) return -1
-      return 0
-    }
+    const lengthDifference = (Object.keys(systems[b]).length) - (Object.keys(systems[a]).length)
+    if(lengthDifference > 0) return 1
+    if(lengthDifference < 0) return -1
+    if (a > b) return 1
+    if (a < b) return -1
+    return 0
   })
 }
 
