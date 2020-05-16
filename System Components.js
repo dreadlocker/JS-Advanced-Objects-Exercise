@@ -33,18 +33,16 @@ function createData(input) {
 }
 
 function sortSystems(systems) {
-  return Object.keys(systems)
-    .sort((a, b) => {
-      const sortByComponentsCount = (Object.keys(systems[b]).length) - (Object.keys(systems[a]).length)
-      let sortByName = 0
-      if (a > b) {
-        sortByName = 1
-      }
-      if (a < b) {
-        sortByName = -1
-      }
-      return sortByComponentsCount || sortByName
-    })
+  return Object.keys(systems).sort((a, b) => {
+    const sortByComponentsCount = (Object.keys(systems[b]).length) - (Object.keys(systems[a]).length)
+    if (sortByComponentsCount) {
+      return sortByComponentsCount
+    } else {
+      if (a > b) return 1
+      if (a < b) return -1
+      return 0
+    }
+  })
 }
 
 function sortSystemComponents(sortedSystems, systems) {
